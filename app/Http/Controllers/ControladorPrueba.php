@@ -9,7 +9,6 @@ use App\Http\Requests;
 class ControladorPrueba extends Controller
 {
     public function getMessage(){
-
-    	echo "Fuck Yeahhhh, vamos por buen camino :)";
+    	return Response()->json(array('msg'=>'Vientos Huracanados. Esta es mi primera API funcional free','error'=>'No Aplica xD'));
     }
 }
