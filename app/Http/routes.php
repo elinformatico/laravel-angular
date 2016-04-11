@@ -11,6 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::group(['prefix' => 'Mobie/', 'middleware' => ['allowOriginMobie']], function() { 
+      
+	Route::get('obtener/mensaje/bienvenida', 'ControladorPrueba@getMessage');
 });
