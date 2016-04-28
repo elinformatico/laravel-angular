@@ -1,0 +1,10 @@
+TRUNCATE actors;
+TRUNCATE countries;
+TRUNCATE directors;
+TRUNCATE genres;
+TRUNCATE movies;
+TRUNCATE movie_actors;
+TRUNCATE movie_countries;
+TRUNCATE movie_genres;
+TRUNCATE movie_writers;
+TRUNCATE writers;
