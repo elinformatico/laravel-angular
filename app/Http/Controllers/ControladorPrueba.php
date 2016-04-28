@@ -11,11 +11,10 @@ class ControladorPrueba extends Controller
 {
     public function getMessage(){
 
-	try{
-            $usuarios = DB::table('users')
-	    ->get();
+		try{
+            $movies = DB::table('movies')->get();
 
-	    return Response()->json(array('msg'=>'Vientos Huracanados. Esta es mi primera API funcional free', 'usuarios' => $usuarios));
+	    return Response()->json(array('movies'=>'', 'movies' => $movies));
 
         }catch(\Illuminate\Database\QueryException $e){
             return Response()->json(array('msg'=>'Error de query al consultar los datos.','error'=>$e));
