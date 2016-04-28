@@ -22,17 +22,51 @@ class ImportMoviesJsonController extends Controller
             
             foreach ($jsonData AS $row) {
                 
-                $countries = explode(',', $row['Country']);
+                
+            }
 
-                foreach($countries AS $country){
-                    $findActor = DB::table('countries')->where('cty_name', '=', $country)->first();
-                    if(!$findActor){
-                        $insertActor = DB::table('countries')
-                        ->insert([                          
-                            'cty_name' => $country
-                        ]);
-                    }
-                }
+            return Response()->json(array('status' => 'success', 'msg' => 'Datos Exportados con Exito!'));
+
+        } catch (\Illuminate\Database\QueryException $e) {
+            return Response()->json(array('status' => 'error', 'codigo' => '1', 'msg' => 'Hubo un error al Importar los Datos', 'error' => $e));
+        }
+    }
+
+    private function importMovies(){
+
+        try {
+
+            # $filename = "short.movies.json";
+            $filename = "movies.json";
+
+            $contents = File::get(base_path() . "\\resources\\assets\\jsonfiles\\{$filename}");
+            $jsonData = (object)json_decode($contents, true);
+            
+            foreach ($jsonData AS $row) {
+                
+                $movie = $row['Title'] . "\n";
+                $director = $row['Director'];
+
+                $directorId = DB::table('directors')
+                ->select('dir_id AS director_id')
+                ->where('dir_name', '=', $director)
+                ->first();
+
+                $directorId = $directorId->director_id;
+                
+                # Insertamos en la Table Movies
+                $insertMovie = DB::table('movies')
+                ->insert([
+                    'mov_dir_id' => $directorId,
+                    'mov_title' => $row['Title'],
+                    'mov_year' => $row['Year'],
+                    'mov_released' => $row['Released'],
+                    'mov_runtime' => str_replace(' min', '', $row['Runtime']),
+                    'mov_synopsis' => $row['Plot'],
+                    'mov_poster' => $row['Poster'],
+                    'mov_language' => $row['Language'],
+                    'mov_awards' => $row['Awards']
+                ]);
             }
 
             return Response()->json(array('status' => 'success', 'msg' => 'Datos Exportados con Exito!'));
