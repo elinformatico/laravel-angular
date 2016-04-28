@@ -22,7 +22,120 @@ class ImportMoviesJsonController extends Controller
             
             foreach ($jsonData AS $row) {
                 
+                $movieId = DB::table('movies')->where('mov_title', '=', $row['Title'])->first();
+                $subObjects = explode(',', $row['Country']);
+
+                foreach ($subObjects as $valueObject) {
+
+                    $subRowId = DB::table('countries')->where('cty_name', '=', $valueObject)->first();              
+
+                    $inserted = DB::table('movie_countries')
+                    ->insert([
+                        'mty_mov_id' => $movieId->mov_id,
+                        'mty_cty_id' => $subRowId->cty_id
+                    ]);
+                }
+            }
+
+            return Response()->json(array('status' => 'success', 'msg' => 'Datos Exportados con Exito!'));
+
+        } catch (\Illuminate\Database\QueryException $e) {
+            return Response()->json(array('status' => 'error', 'codigo' => '1', 'msg' => 'Hubo un error al Importar los Datos', 'error' => $e));
+        }
+    }
+
+    private function importMovieWrites(){
+
+        try {
+            # $filename = "short.movies.json";
+            $filename = "movies.json";
+
+            $contents = File::get(base_path() . "\\resources\\assets\\jsonfiles\\{$filename}");
+            $jsonData = (object)json_decode($contents, true);
+            
+            foreach ($jsonData AS $row) {
                 
+                $movieId = DB::table('movies')->where('mov_title', '=', $row['Title'])->first();
+                $subObjects = explode(',', $row['Writer']);
+
+                foreach ($subObjects as $valueObject) {
+
+                    $subRowId = DB::table('writers')->where('wrt_name', '=', $valueObject)->first();              
+
+                    $inserted = DB::table('movie_writers')
+                    ->insert([
+                        'mvr_mov_id' => $movieId->mov_id,
+                        'mvr_wrt_id' => $subRowId->wrt_id
+                    ]);
+                }
+            }
+
+            return Response()->json(array('status' => 'success', 'msg' => 'Datos Exportados con Exito!'));
+
+        } catch (\Illuminate\Database\QueryException $e) {
+            return Response()->json(array('status' => 'error', 'codigo' => '1', 'msg' => 'Hubo un error al Importar los Datos', 'error' => $e));
+        }
+    }
+
+    private function importMovieActors(){
+
+        try {
+
+            # $filename = "short.movies.json";
+            $filename = "movies.json";
+
+            $contents = File::get(base_path() . "\\resources\\assets\\jsonfiles\\{$filename}");
+            $jsonData = (object)json_decode($contents, true);
+            
+            foreach ($jsonData AS $row) {
+                
+                $movieId = DB::table('movies')->where('mov_title', '=', $row['Title'])->first();
+                $subObjects = explode(',', $row['Actors']);
+
+                foreach ($subObjects as $valueObject) {
+
+                    $subRowId = DB::table('actors')->where('act_name', '=', $valueObject)->first();              
+
+                    $inserted = DB::table('movie_actors')
+                    ->insert([
+                        'mva_mov_id' => $movieId->mov_id,
+                        'mva_act_id' => $subRowId->act_id
+                    ]);
+                }
+            }
+
+            return Response()->json(array('status' => 'success', 'msg' => 'Datos Exportados con Exito!'));
+
+        } catch (\Illuminate\Database\QueryException $e) {
+            return Response()->json(array('status' => 'error', 'codigo' => '1', 'msg' => 'Hubo un error al Importar los Datos', 'error' => $e));
+        }
+    }
+
+    private function importMovieGenres(){
+
+        try {
+
+            # $filename = "short.movies.json";
+            $filename = "movies.json";
+
+            $contents = File::get(base_path() . "\\resources\\assets\\jsonfiles\\{$filename}");
+            $jsonData = (object)json_decode($contents, true);
+            
+            foreach ($jsonData AS $row) {
+                
+                $movieId = DB::table('movies')->where('mov_title', '=', $row['Title'])->first();
+                $genres = explode(',', $row['Genre']);
+
+                foreach ($genres as $genre) {
+
+                    $generoId = DB::table('genres')->where('gre_name', '=', $genre)->first();              
+
+                    $inserted = DB::table('movie_genres')
+                    ->insert([
+                        'mvg_mov_id' => $movieId->mov_id,
+                        'mvg_gre_id' => $generoId->gre_id
+                    ]);
+                }
             }
 
             return Response()->json(array('status' => 'success', 'msg' => 'Datos Exportados con Exito!'));
