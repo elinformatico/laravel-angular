@@ -8,3 +8,26 @@ TRUNCATE movie_countries;
 TRUNCATE movie_genres;
 TRUNCATE movie_writers;
 TRUNCATE writers;
+
+Mostrar todas las peliculas disponibles
+(Buscar por cualquier nombre)
+
+Filtro Avanzado
+
+------------------------------------------------------
+
+Mostrar Listado de Generos
+(Mostrar Peliculas por Listado de Genero)
+
+Mostrar Listado de Paises
+(Mostrar Peliculas por Paises)
+
+Buscar Peliculas por Actores
+(Buscar Peliculas en donde haya participado Actores)
+
+Buscar Peliculas por Directores
+(Directores que haya dirigido Peliculas)
+
+Buscar Peliculas por Escritores
+(Escritores)
+

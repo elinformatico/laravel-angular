@@ -16,6 +16,9 @@
 // });
 
 Route::group(['prefix' => 'mobie/', 'middleware' => ['guest']], function() { 
+
 	Route::get('obtener/mensaje/bienvenida', 'ControladorPrueba@getMessage');
 	Route::get('exportacion/json/movies', 'ImportMoviesJsonController@import');
+	Route::get('get/countries', 'CountriesController@getCountries');
+
 });

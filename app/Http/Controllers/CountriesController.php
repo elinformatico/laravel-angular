@@ -7,17 +7,17 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use DB;
 
-class ControladorPrueba extends Controller
+class CountriesController extends Controller
 {
-    public function getMessage(){
+   public function getCountries(){
 
-		try{
-            $movies = DB::table('movies')->get();
-
-	    	return Response()->json(array('movies'=>'', 'movies' => $movies));
+   		try{
+           	
+           	$countries = DB::table('countries')->get();
+	    	return Response()->json(array('countries'=>'', 'countries' => $countries));
 
         }catch(\Illuminate\Database\QueryException $e){
             return Response()->json(array('msg'=>'Error de query al consultar los datos.','error'=>$e));
         }
-    }
+   }
 }
