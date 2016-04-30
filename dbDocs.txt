@@ -31,3 +31,71 @@ Buscar Peliculas por Directores
 Buscar Peliculas por Escritores
 (Escritores)
 
+===== TABLES
+
+
+actors
+act_id bigint(20) NOT NULL AUTO_INCREMENT
+act_name text NOT NULL
+
+countries
+cty_id bigint(20) NOT NULL AUTO_INCREMENT
+cty_name text NOT NULL
+
+
+directors
+dir_id bigint(20) NOT NULL AUTO_INCREMENT
+dir_name text NOT NULL
+
+
+genres
+gre_id bigint(20) NOT NULL AUTO_INCREMENT
+gre_name text NOT NULL
+
+
+movies
+mov_id bigint(20) unsigned NOT NULL AUTO_INCREMENT
+mov_dir_id bigint(20) NOT NULL
+mov_title text NOT NULL
+mov_year int(4) NOT NULL
+mov_released text NOT NULL
+mov_runtime int(11) NOT NULL
+mov_synopsis text NOT NULL
+mov_poster text NOT NULL
+mov_language text NOT NULL
+mov_awards text NOT NULL
+
+
+movie_actors
+mva_mov_id bigint(20) NOT NULL
+mva_act_id bigint(20) NOT NULL
+
+
+movie_countries
+mty_mov_id bigint(20) NOT NULL
+mty_cty_id bigint(20) NOT NULL
+
+
+movie_genres
+mvg_mov_id bigint(20) NOT NULL
+mvg_gre_id bigint(20) NOT NULL
+
+
+
+
+movie_writers
+mvr_mov_id bigint(20) NOT NULL
+mvr_wrt_id bigint(20) NOT NULL
+
+
+
+users
+id int(11) NOT NULL
+user text
+pass text
+
+
+writers
+wrt_id bigint(20) NOT NULL AUTO_INCREMENT
+wrt_name text NOT NULL
+
