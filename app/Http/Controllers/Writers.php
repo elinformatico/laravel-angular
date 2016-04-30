@@ -15,6 +15,14 @@ class Writers extends Controller
     		$writers = DB::table('writers')
     		->get();
 
+            // ->where(function ($datosAnticipoAut) use ($request) {
+            //     if ($request->compania == 'TP') {
+            //         $datosAnticipoAut->whereIn('OCHFAC', ['TP', 'EP', 'OP']);
+            //     } else {
+            //         $datosAnticipoAut->where('OCHFAC', '=', $request->compania);
+            //     }
+            // }) 
+
     		if(count($writers) > 0){
                 return Response()->json(array('status' => 'success', 'writers' => $writers, 'msg' => 'Writers Obtenidos Satisfactoriamente.'));
             } else {

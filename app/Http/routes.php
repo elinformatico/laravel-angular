@@ -19,8 +19,14 @@ Route::group(['prefix' => 'mobie/', 'middleware' => ['guest']], function() {
 
 	Route::get('obtener/mensaje/bienvenida', 'ControladorPrueba@getMessage');
 	Route::get('exportacion/json/movies', 'ImportMoviesJsonController@import');
+
+	# --------------------------------------------------------------
 	Route::get('get/countries', 'CountriesController@getCountries');
 	Route::get('get/movies', 'MoviesController@getMovies');
+	
+
+	Route::get('movies/actors/{movieId?}', 'MoviesController@getActorMovies');
+
 
 	# Directors
 	Route::get('directors/get', 'Directors@getDirectors');
