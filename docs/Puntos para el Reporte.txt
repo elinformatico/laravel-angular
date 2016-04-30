@@ -1,0 +1,10 @@
+SUBJECT: BASE DE DATOS
+
+- Introducción
+Problemas que intentamos resolver
+- Marco Teorico (¿Que necesito Saber y el porque?
+- Diseño de la Solución
+- Implementación
+- Resultados
+- Conclusiones y Trabajo a Futuro
+- Referencias
