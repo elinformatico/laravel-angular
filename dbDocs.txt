@@ -1,3 +1,5 @@
+
+
 TRUNCATE actors;
 TRUNCATE countries;
 TRUNCATE directors;
@@ -32,7 +34,6 @@ Buscar Peliculas por Escritores
 (Escritores)
 
 ===== TABLES
-
 
 actors
 act_id bigint(20) NOT NULL AUTO_INCREMENT

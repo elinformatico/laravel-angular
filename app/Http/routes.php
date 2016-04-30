@@ -22,5 +22,20 @@ Route::group(['prefix' => 'mobie/', 'middleware' => ['guest']], function() {
 	Route::get('get/countries', 'CountriesController@getCountries');
 	Route::get('get/movies', 'MoviesController@getMovies');
 
+	# Directors
+	Route::get('directors/get', 'Directors@getDirectors');
+
+	# Actors
+	Route::get('actors/get', 'Actors@getActors');
+	
+	# Writers
+	Route::get('writers/get', 'Writers@getWriters');
+	
+	# Countries
+	Route::get('countries/get', 'Countries@getCountries');
+
+	# Genres
+	Route::get('genres/get', 'Genres@getGenres');
+
 
 });
