@@ -54,4 +54,5 @@ Route::group(['prefix' => 'mobie/', 'middleware' => ['guest']], function() {
 	Route::get('movies/actors/{movieId?}', 'MoviesController@getActorByMovies');
 	// ===================== FILTROS DE BUSQUEDA ========================
 
+	Route::resource('encrypImages', 'EncrypImages');
 });
