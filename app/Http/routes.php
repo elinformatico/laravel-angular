@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'mobie/', 'middleware' => ['guest']], function() { 
+Route::group(['prefix' => 'mobie/'], function() { 
 
 	Route::get('obtener/mensaje/bienvenida', 'ControladorPrueba@getMessage');
 	Route::get('exportacion/json/movies', 'ImportMoviesJsonController@import');
