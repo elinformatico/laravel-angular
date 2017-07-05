@@ -52,6 +52,8 @@ Route::group(['prefix' => 'mobie/', 'middleware' => ['guest']], function() {
 	# Busqueda por Generos
 	# Actores que hayan participado en X Pelicula
 	Route::get('movies/actors/{movieId?}', 'MoviesController@getActorByMovies');
+
+	Route::post('registrar/gasolina', 'GasolinaController@registrarGasolina');
 	// ===================== FILTROS DE BUSQUEDA ========================
 
 	Route::resource('encrypImages', 'EncrypImages');
