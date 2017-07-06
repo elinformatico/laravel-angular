@@ -15,7 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'mobie/'], function() { 
+Route::group(['prefix' => 'mobie/', 'middleware' => ['throttle']], function() { 
 
 	Route::get('obtener/mensaje/bienvenida', 'ControladorPrueba@getMessage');
 	Route::get('exportacion/json/movies', 'ImportMoviesJsonController@import');
@@ -54,6 +54,7 @@ Route::group(['prefix' => 'mobie/'], function() {
 	Route::get('movies/actors/{movieId?}', 'MoviesController@getActorByMovies');
 
 	Route::post('registrar/gasolina', 'GasolinaController@registrarGasolina');
+	Route::get('get/kilometraje', 'GasolinaController@getUltimoKilometraje');
 	// ===================== FILTROS DE BUSQUEDA ========================
 
 	Route::resource('encrypImages', 'EncrypImages');
