@@ -51,11 +51,20 @@ Route::group(['prefix' => 'mobie/', 'middleware' => ['throttle']], function() {
 	# Busqueda por Escritores
 	# Busqueda por Generos
 	# Actores que hayan participado en X Pelicula
-	Route::get('movies/actors/{movieId?}', 'MoviesController@getActorByMovies');
+	# Route::get('movies/actors/{movieId?}', 'MoviesController@getActorByMovies');
+    # Route::resource('encrypImages', 'EncrypImages');
 
+
+	# Nuevo Sistema
 	Route::post('registrar/gasolina', 'GasolinaController@registrarGasolina');
 	Route::get('get/kilometraje', 'GasolinaController@getUltimoKilometraje');
-	// ===================== FILTROS DE BUSQUEDA ========================
 
-	Route::resource('encrypImages', 'EncrypImages');
+	# Catalogs
+    Route::get('get/categories', 'Catalogs@getCategories');
+    Route::get('get/paymentmethods', 'Catalogs@getPaymentMethods');
+    Route::get('get/banks', 'Catalogs@getBanks');
+
+    # Save the Financial Log
+    Route::post('store/financial/log', 'FinancialLog@saveFinancialLog');
+
 });
