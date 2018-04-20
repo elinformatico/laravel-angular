@@ -55,6 +55,41 @@ class Catalogs extends Controller
         }
     }
 
+    public function getPaymentMethodsByType($type){
+
+        try{
+
+            $paymentMethods = null;
+            if($type == 'gasolina')
+            {
+                $paymentMethods = DB::table('payment_method')
+                ->whereIn('pmt_name', 
+                    [
+                        'Tarjeta de Debido',
+                        'Tarjeta de Credito', 
+                        'Efectivo',
+                        'Vales de Gasolina'
+                    ])
+                ->orderBy('pmt_name', 'asc')
+                ->get();
+            }
+
+            if(count($paymentMethods) > 0){
+                return Response()->json(array(
+                    'status' => 'success',
+                    'paymentMethods' => $paymentMethods,
+                    'msg' => 'The records of the payment methods were successfully obtained.'));
+            } else {
+                return Response()->json(array(
+                    'status' => 'error',
+                    'msg'=>"There are no payment methods registered in the database."));
+            }
+
+        }catch(\Illuminate\Database\QueryException $e){
+            return Response()->json(array('status' => 'error', 'msg'=>'Error on DB System','error'=>$e));
+        }
+    }
+
     public function getBanks(){
         try{
 

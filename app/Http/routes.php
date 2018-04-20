@@ -62,6 +62,7 @@ Route::group(['prefix' => 'mobie/', 'middleware' => ['throttle']], function() {
 	# Catalogs
     Route::get('get/categories', 'Catalogs@getCategories');
     Route::get('get/paymentmethods', 'Catalogs@getPaymentMethods');
+    Route::get('get/paymentmethods/{type}', 'Catalogs@getPaymentMethodsByType');
     Route::get('get/banks', 'Catalogs@getBanks');
 
     # Save the Financial Log
