@@ -32,7 +32,7 @@ class FinancialLog extends Controller
             return Response()->json(array('status' => 'success', 'msg' => 'El registro fue almacenado exitosamente'));
 
         } catch(\Illuminate\Database\QueryException $e){
-            return Response()->json(array('status' => 'error', 'msg'=>'Error on DB System ' . $e,'error'=>$e));
+            return Response()->json(array('status' => 'error', 'msg'=>'Hubo un error al registrar el Log de Finanzas','error'=>$e));
         }
     }
 }

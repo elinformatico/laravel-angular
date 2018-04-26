@@ -112,4 +112,28 @@ class Catalogs extends Controller
             return Response()->json(array('status' => 'error', 'msg'=>'Error al ejecutar el query.','error'=>$e));
         }
     }
+
+    public function getCars() 
+    {
+        try{
+
+            $cars = DB::table('car')
+                ->get();
+
+            if(count($cars) > 0){
+                return Response()->json(array(
+                    'status' => 'success',
+                    'cars' => $cars,
+                    'msg' => 'The records of the cars were successfully obtained.'));
+            } else {
+                return Response()->json(array(
+                    'status' => 'error',
+                    'msg'=>"There are no cars registered in the database."));
+            }
+
+        }catch(\Illuminate\Database\QueryException $e){
+            return Response()->json(array('status' => 'error', 'msg'=>'Error al ejecutar el query.','error'=>$e));
+        }
+
+    }
 }

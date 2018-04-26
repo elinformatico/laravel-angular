@@ -57,15 +57,15 @@ Route::group(['prefix' => 'mobie/', 'middleware' => ['throttle']], function() {
 
 	# Nuevo Sistema
 	Route::post('registrar/gasolina', 'GasolinaController@registrarGasolina');
-	Route::get('get/kilometraje', 'GasolinaController@getUltimoKilometraje');
+	Route::get('get/kilometraje/{carId}', 'GasolinaController@getUltimoKilometrajeByCar');
 
 	# Catalogs
     Route::get('get/categories', 'Catalogs@getCategories');
     Route::get('get/paymentmethods', 'Catalogs@getPaymentMethods');
     Route::get('get/paymentmethods/{type}', 'Catalogs@getPaymentMethodsByType');
     Route::get('get/banks', 'Catalogs@getBanks');
-
+    Route::get('get/cars', 'Catalogs@getCars');
+    
     # Save the Financial Log
     Route::post('store/financial/log', 'FinancialLog@saveFinancialLog');
-
 });

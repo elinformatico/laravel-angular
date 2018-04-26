@@ -15,6 +15,7 @@ class GasolinaController extends Controller
 
     		$insertId = DB::table('registro_gasolina')->insertGetId(
 			    [
+                    'rgas_car_id_fk'    => $_REQUEST['carId'],
 			    	'rgas_litros'       => $_REQUEST['litros'], 
 			    	'rgas_tipoGasolina' => $_REQUEST['tipoGasolina'],
 			    	'rgas_monto'        => $_REQUEST['montoGasolina'],
@@ -23,41 +24,47 @@ class GasolinaController extends Controller
 			    ]
 			);
 
-			return Response()->json(array('status' => 'success', 'msg' => "El registro fue almacenado exitosamente con el ID [{$insertId}]: "));
+			return Response()->json(array('status' => 'success', 'msg' => "Se registro la carga de Gasolina correctamente."));
             //return response('Unauthorized.', 401);
 
-    	} catch(\Illuminate\Database\QueryException $e){
-            return Response()->json(array('status' => 'error', 'msg'=>'Error al ejecutar el query.','error'=>$e));
+    	} catch(\Illuminate\Database\QueryException $e){            
+            return Response()->json(array('status' => 'error', 'msg'=>'Hubo un Error al Registrar la Gasolina','error'=>$e));
         }
     }
 
-    public function getUltimoKilometraje()
+    public function getUltimoKilometrajeByCar($carId)
     {
-        try {
+        try{
 
-            $maximoKilometraje = DB::table('registro_gasolina')->max('rgas_kilometraje');
+            if($carId > 0){
 
-            return Response()->json(array('status' => 'success', 'kilometraje' => $maximoKilometraje, 'msg' => 'Se obtuvo el máximo Kilometraje registrado'));
-            //return response('Unauthorized.', 401);
+                $kilometraje = DB::table("registro_gasolina")
+                                ->select("rgas_kilometraje as kilometraje")
+                                ->join("car", "rgas_car_id_fk", "=", "car_id")
+                                ->where("car_id", $carId)
+                                ->max("rgas_kilometraje");
 
-        } catch(\Illuminate\Database\QueryException $e){
-            return Response()->json(array('status' => 'error', 'msg'=>'Error al ejecutar el query.','error'=>$e));
+                if($kilometraje != null)
+                {
+                    return Response()->json(array(
+                    'status' => 'success', 
+                    'kilometraje' => $kilometraje, 
+                    'msg' => 'Se obtuvo el kilometraje para el carro con ID ' + $carId));
+
+                } else {
+                    return Response()->json(array(
+                    'status' => 'error',
+                    'msg' => "The Car Id [{$carId}] does not exits"));
+                }
+
+            } else {
+                return Response()->json(array(
+                    'status' => 'error',
+                    'msg' => 'The Id Car is not correct'));
+            }
+
+        }catch(\Illuminate\Database\QueryException $e){
+            return Response()->json(array('status' => 'error', 'msg'=>'Error on DB System','error'=>$e));
         }
-    }
-
-    public function getUltimoRegistroGasolina()
-    {
-
-        try {
-
-            $maximoKilometraje = DB::table('registro_gasolina')->max('rgas_kilometraje');
-
-            return Response()->json(array('status' => 'success', 'kilometraje' => $maximoKilometraje, 'msg' => 'Se obtuvo el máximo Kilometraje registrado'));
-            //return response('Unauthorized.', 401);
-
-        } catch(\Illuminate\Database\QueryException $e){
-            return Response()->json(array('status' => 'error', 'msg'=>'Error al ejecutar el query.','error'=>$e));
-        }
-
     }
 }
